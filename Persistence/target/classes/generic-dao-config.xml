@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="extendedFinderNamingStrategy" class="entelect.spring.example.dao.generic.finder.impl.SimpleFinderNamingStrategy"/>
+
+    <bean id="finderIntroductionAdvisor" class="entelect.spring.example.dao.generic.finder.impl.FinderIntroductionAdvisor"/>
+
+    <bean id="abstractDao" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>finderIntroductionAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id ="abstractDaoTarget" class="entelect.spring.example.dao.generic.impl.GenericDaoImpl" abstract="true">
+        <property name="namingStrategy" ref="extendedFinderNamingStrategy"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <!-- An example of a bean using an inner bean to do setter injection on the outer bean-->
+       <bean id="customerDao" parent="abstractDao">
+              <property name="proxyInterfaces" value="entelect.spring.example.dao.CustomerDao"/>
+              <property name="target">
+                     <bean parent="abstractDaoTarget">
+                            <constructor-arg value="entelect.spring.example.dao.model.Customer"/>
+                     </bean>
+              </property>
+       </bean>
+
+       <bean id="productDao" parent="abstractDao">
+              <property name="proxyInterfaces" value="entelect.spring.example.dao.ProductDao"/>
+              <property name="target">
+                     <bean parent="abstractDaoTarget">
+                            <constructor-arg value="entelect.spring.example.dao.model.Product"/>
+                     </bean>
+              </property>
+       </bean>
+
+       <bean id="customerOrderDao" parent="abstractDao">
+              <property name="proxyInterfaces" value="entelect.spring.example.dao.CustomerOrderDao"/>
+              <property name="target">
+                     <bean parent="abstractDaoTarget">
+                            <constructor-arg value="entelect.spring.example.dao.model.CustomerOrder"/>
+                     </bean>
+              </property>
+       </bean>
+
+       <beans profile="test">
+              <bean id="profiledBean" class="java.lang.String">
+                     <constructor-arg name="value" value="this is a profiled bean"/>
+              </bean>
+       </beans>
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <import resource="classpath*:persistence-config.xml"/>
+
+       <!-- No injection required, as the class uses the autowired annotation aka field injection-->
+       <bean id="customerService" class="entelect.spring.example.service.impl.CustomerServiceImpl" />
+
+       <!-- Setter injection using xml config-->
+       <bean id="productService" class="entelect.spring.example.service.impl.ProductServiceImpl">
+              <property name="productDao" ref="productDao"/>
+       </bean>
+
+       <!-- Constructor injection using xml config-->
+       <bean id="customerOrderService" class="entelect.spring.example.service.impl.CustomerOrderServiceImpl">
+              <constructor-arg name="customerOrderDao" ref="customerOrderDao" />
+       </bean>
+
+</beans>
