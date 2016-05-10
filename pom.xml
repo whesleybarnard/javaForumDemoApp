@@ -10,7 +10,6 @@
     <modules>
         <module>Persistence</module>
         <module>Domain</module>
-        <module>Web</module>
         <module>lifecycle</module>
     </modules>
 
